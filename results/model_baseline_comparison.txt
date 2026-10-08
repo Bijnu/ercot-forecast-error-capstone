@@ -1,0 +1,52 @@
+EXPLORATORY MODEL VERSUS MAJORITY-CLASS BASELINE COMPARISON
+Input SHA256: 8326661600c456a6989f91b599d84c581da86d0c7c50bba5dbf36a1b89bd6f38
+Test observations: 8497; UTC calendar days: 365
+Days with no retained observations: 10
+Absent test hours: 263 (not imputed)
+TN=4980, FP=2719, FN=330, TP=468
+Replicates per block length: 10000; base seed: 20261007
+Baseline always predicts 0, selected from the development-set majority.
+Classification cutoff: 0.5. No retraining or cutoff optimization.
+
+POINT ESTIMATES (proportions):
+{
+  "model": {
+    "accuracy": 0.6411674708720725,
+    "balanced_accuracy": 0.6166517085023248,
+    "precision": 0.14684656416692815,
+    "recall": 0.5864661654135338,
+    "f1": 0.23488080301129236
+  },
+  "baseline": {
+    "accuracy": 0.9060845004119101,
+    "balanced_accuracy": 0.5,
+    "precision": null,
+    "recall": 0.0,
+    "f1": 0.0
+  }
+}
+
+PAIRED DIFFERENCES: MODEL MINUS BASELINE (percentage points)
+7-day blocks, accuracy: -26.492; 95% CI [-33.368, -20.093]
+7-day blocks, balanced_accuracy: 11.665; 95% CI [5.981, 16.706]
+14-day blocks, accuracy: -26.492; 95% CI [-35.167, -18.660]
+14-day blocks, balanced_accuracy: 11.665; 95% CI [5.598, 16.625]
+28-day blocks, accuracy: -26.492; 95% CI [-37.428, -16.782]
+28-day blocks, balanced_accuracy: 11.665; 95% CI [6.238, 15.965]
+
+METHOD AND LIMITATIONS:
+Post hoc exploratory analysis: metric and inference method were selected after observing test results.
+Primary block length: 7 days; 14 and 28 days are sensitivity checks, not opportunities to select a favorable result.
+Each bootstrap draw resamples 365 days in consecutive circular blocks, using identical days for both methods.
+Daily confusion counts preserve gaps; zero-observation days remain on the calendar. The final block is truncated.
+Intervals are percentile intervals. Balanced accuracy averages sensitivity and specificity.
+No p-values or prespecified confirmatory hypothesis-test conclusions are reported.
+Model accuracy is lower than baseline accuracy. Balanced accuracy addresses a different objective.
+The intervals assume blocks adequately represent dependence. Seasonal change and one test year limit inference.
+Circular blocks join year-end to year-start. Block lengths may not capture longer dependence.
+Inference is conditional on the fitted model and retained test hours; it excludes training uncertainty and missing hours.
+Baseline precision is undefined because it predicts no positives; F1 is zero.
+
+METHOD REFERENCES:
+https://bashtage.github.io/arch/devel/bootstrap/timeseries-bootstraps.html
+https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html

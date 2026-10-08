@@ -1,0 +1,12 @@
+SELECT
+  respondent,
+  type,
+  `value-units` AS units,
+  COUNT(*) AS row_count,
+  MIN(period) AS first_period,
+  MAX(period) AS last_period,
+  COUNTIF(value IS NULL) AS missing_values,
+  COUNTIF(value <= 0) AS nonpositive_values
+FROM `ercot-508403.ercot_capstone.ercot_raw`
+GROUP BY respondent, type, `value-units`
+ORDER BY type;

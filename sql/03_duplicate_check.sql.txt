@@ -1,0 +1,7 @@
+SELECT COUNT(*) AS duplicate_key_groups
+FROM (
+  SELECT period, respondent, type
+  FROM `ercot-508403.ercot_capstone.ercot_raw`
+  GROUP BY period, respondent, type
+  HAVING COUNT(*) > 1
+);

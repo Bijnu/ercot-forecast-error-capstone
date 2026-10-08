@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS total_rows FROM `ercot-508403.ercot_capstone.ercot_raw`;

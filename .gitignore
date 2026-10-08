@@ -1,0 +1,15 @@
+﻿__pycache__/
+*.pyc
+.env
+.env.*
+.venv/
+venv/
+*credentials*.json
+*service-account*.json
+report/
+~$*
+/download_ercot_eia930.py
+/ercot_eia930_2021_2025.csv
+/screenshots/24_billing_account_linked.png
+/screenshots/10_hourly_table_created.png.png
+/screenshots/18_calendar_features_created.png
